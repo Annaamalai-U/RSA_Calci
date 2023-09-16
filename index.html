@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RSA Encryption and Decryption</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/x-icon" href="https://cdn3.iconfinder.com/data/icons/letters-and-numbers-1/32/letter_R_red-1024.png">
+</head>
+<body>
+  <div class="header">
+    <h1>RSA Asymetric Algorithm</h1>
+  </div>
+  <div class="details">
+    <div class="d1">
+      <div class="d2">
+        <h1>RSA Algorithm</h1><hr>
+        <p>
+          One of the first public-key cryptosystems, RSA (Rivest-Shamir-Adleman), is frequently used for safe 
+          data transfer.The encryption key in a public-key cryptosystem is separate from the decryption key, 
+          which is kept confidential (private). A user of RSA generates and disseminates a public key using two 
+          significant prime integers and an auxiliary value. It is a mystery what the prime numbers are. Anyone 
+          can encrypt messages using the public key, but only someone who is familiar with the prime numbers can 
+          decode them.
+        </p>
+        <p>
+          The "factoring problem," which is the practical challenge of factoring the product of two huge prime 
+          numbers, is the foundation for RSA security. The RSA issue is the process of deciphering RSA encryption.
+          It is debatable if it is equally challenging as the factoring issue. If a large enough key is used, 
+          the system cannot be beaten using any disclosed techniques.
+        </p>
+        <p>
+          The RSA algorithm is a somewhat slow one. It is not frequently used to directly encrypt user data as a 
+          result. Shared keys for symmetric-key cryptography are often sent via RSA, and these keys are then 
+          utilised for mass encryption and decryption.
+        </p>
+        <div class="rsa_imgs">
+          <figure class="rsa_figure">
+            <a href="https://www.bing.com/search?q=Ronald+L.+Rivest&FORM=HDRSC1" target="_blank"><img class="rsa" alt="Ronald L. Rivest" src="https://th.bing.com/th/id/R.da654d7ab7cbd38e493245b88f744b89?rik=2qB%2bfb0It7Izsg&riu=http%3a%2f%2fpeople.csail.mit.edu%2frivest%2fphotos%2frivest_photo.jpg&ehk=VxQtzZnfGE7p871onDytFWuVHmqKD65UotR2y72Y9As%3d&risl=&pid=ImgRaw&r=0"></a>
+              <figcaption><a href="https://www.bing.com/search?q=Ronald+L.+Rivest&FORM=HDRSC1" target="_blank">Ronald L. Rivest</a></figcaption>
+          </figure>
+          
+          <figure class="rsa_figure">
+            <a href="https://www.bing.com/search?q=Adi+Shamir&FORM=HDRSC1" target="_blank"><img class="rsa" alt="Adi Shamir" src="https://th.bing.com/th/id/OIP.M2escuZEhytC3PrIJA0mnQHaIc?pid=ImgDet&rs=1"></a>
+              <figcaption><a href="https://www.bing.com/search?q=Adi+Shamir&FORM=HDRSC1" target="_blank">Adi Shamir</a></figcaption>
+          </figure>
+        
+          <figure class="rsa_figure">
+            <a href="https://www.bing.com/search?q=Leonard+Adleman&FORM=HDRSC1" target="_blank"><img class="rsa" alt="Leonard Adleman" src="https://th.bing.com/th/id/R.4743d1389c3a1d9a09572c2aa483d22b?rik=OBigW44jwwNpbA&riu=http%3a%2f%2fwww-history.mcs.st-and.ac.uk%2fBigPictures%2fAdleman.jpeg&ehk=JGu8k3l4ulJ1BEQhxxtyuPJM71q2kHOK15eE4qIf14Q%3d&risl=&pid=ImgRaw&r=0"></a>
+              <figcaption><a href="https://www.bing.com/search?q=Leonard+Adleman&FORM=HDRSC1" target="_blank">Leonard Adleman</a></figcaption>
+          </figure>
+      </div>
+      </div>
+      <div class="subdetails">
+        <div class="sd1">
+          <h2>Operations</h2><hr>
+          <div class="sdd1">
+            <ol>
+              <li>key generation</li>
+              <li>Key distribution</li>
+              <li>Encryption</li>
+              <li>Decryption</li>
+            </ol>
+          </div>
+        </div>
+        <div class="sd2">
+          <div class="sdd2">
+            <h2>Key Generation</h2><hr>
+            <p>
+              We must first create the two big prime numbers p and q. The product of these primes should be 
+              substantially greater than the message we wish to encrypt, and they should be nearly equal in 
+              length.
+            </p>
+            <p>
+              Any primality testing procedure, such as the Miller-Rabin test, can be used to create the primes. 
+              We can calculate their product, n = p*q, which will be the modulus for our RSA system, after we 
+              know the two prime numbers.
+            </p>
+            <p>
+              The next step is to select an integer e such that 1&lt;e&lt;phi(n) and gcd(e, phi(n)) = 1, 
+              where phi(n) = (p-1)*(q-1) is the totient function of Euler. The exponent of the public key will 
+              be this value of e.
+            </p>
+            <p>
+              We must identify an integer d such that d*e = 1 (mod phi(n)) in order to calculate the private key 
+              exponent d. The extended Euclidean method can be utilised for this.
+              Both our public and private keys are (n, e), respectively.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="subdetails">
+        <div class="sd1">
+          <h2>RSA Encryption</h2><hr>
+          <div class="sdd1">
+            <p>
+              A message m must be transformed into an integer between 0 and n-1 in order to be encrypted. 
+              A reversible encoding method, such as ASCII or UTF-8, can be used for this.
+            </p>
+            <p>
+              We calculate the ciphertext c as c = m<sup>e</sup> (mod n) after we obtain the message's integer 
+              representation. Using modular exponentiation methods, such as binary exponentiation, this may 
+              be accomplished effectively.
+            </p>
+          </div>
+        </div>
+        <div class="sd2">
+          <h2>RSA Decryption</h2><hr>
+          <div class="sdd2">
+            <p>
+              We calculate the plaintext m as m = c<sup>d</sup>(mod n) in order to decipher the ciphertext c. Again, 
+              we can accomplish this quickly by using modular exponentiation techniques.
+
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="header">
+    <h1>RSA Implementation</h1>
+  </div>
+  <div class="a_container">
+  <div class="box">
+    <h1>RSA Encryption and Decryption</h1><hr>
+    
+    <h2>Key Length:</h2>
+    <input type="radio" id="key512" name="keyLength" value="4">
+    <label for="key512">4 bits</label>
+    <input type="radio" id="key1024" name="keyLength" value="8">
+    <label for="key1024">8 bits</label>
+    <input type="radio" id="key2048" name="keyLength" value="16">
+    <label for="key2048">16 bits</label>
+    
+    <h2>Generate Parameters:</h2>
+    <label for="p">P:</label>
+    <input type="text" id="p" name="p" placeholder="P Value"><br>
+    <label for="q">Q:</label>
+    <input type="text" id="q" name="q" placeholder="Q Value"><br>
+    <label for="p">N:</label>
+    <input type="text" id="n" name="n" placeholder="N Value"><br>
+    <label for="q">φ(n):</label>
+    <input type="text" id="φ(n)" name="φ(n)" placeholder="φ(n)">
+    <button onclick="calculate()"><ion-icon name="refresh"></ion-icon> Auto Generate</button>
+  
+    <h2>Input E:</h2>
+    <label for="e">E:</label>
+    <input type="text" id="e" name="e" placeholder="Enter E Value">
+    <button onclick="checkE()"><ion-icon name="checkmark-circle"></ion-icon> Check E</button>
+    <div id="result"></div>
+
+    <h2>Private Key:</h2>
+    <label for="d">D:</label>
+    <input type="text" id="d" name="d" placeholder="Private Key">
+    <button onclick="calculateD()"><ion-icon name="refresh"></ion-icon> Generate D</button>
+  </div>
+  
+  <div class="encrypt-box">
+    <h1>RSA Encryption</h1>
+    <hr>
+    <div class="flex-container">
+      <h2>Plain Text:</h2>
+      <textarea id="plainText_e" rows="10" cols="50"></textarea>
+      <div class="btn_container">
+      <button onclick="uploadPlainText1()" id="upload"><ion-icon name="cloud-upload-sharp"></ion-icon>Upload</button>
+      <button onclick="encrypt()" id="encrypt"><ion-icon name="arrow-forward-circle-outline"></ion-icon>Encrypt</button>
+    </div>
+    </div>
+    
+    <div class="flex-container">
+      <h2>Cipher Text:</h2>
+      <textarea id="encryptedText" rows="10" cols="50" readonly></textarea>
+      <div class="btn_container1">
+        <button id="download" onclick="downloadProcessedText()"><ion-icon name="arrow-down-outline"></ion-icon>Download</button>
+      <button id="copy" onclick="copy1()"><ion-icon name="copy"></ion-icon> Copy</button>
+      </div>
+      
+  </div>
+  </div>
+  <div class="decrypt-box">
+    <h1>RSA Decryption</h1>
+    <hr>
+    <div class="flex-container">
+      <h2>Cipher Text:</h2>
+      <textarea id="plainText_d" rows="10" cols="50"></textarea>
+      <div class="btn_container">
+      <button onclick="uploadPlainText2()" id="upload"><ion-icon name="cloud-upload-sharp"></ion-icon>Upload</button>
+      <button onclick="decrypt()" id="decrypt"><ion-icon name="arrow-back-circle-outline"></ion-icon>Decrypt</button>
+    </div>
+    </div>
+    
+    <div class="flex-container">
+      <h2>Plain Text:</h2>
+      <textarea id="decryptedText" rows="10" cols="50" readonly></textarea>
+      <div class="btn_container1">
+        <button id="download" onclick="downloadProcessedText()"><ion-icon name="arrow-down-outline"></ion-icon>Download</button>
+         <button id="copy" onclick="copy2()"><ion-icon name="copy"></ion-icon> Copy</button>
+      </div>
+  </div>
+  </div>
+</div>
+<div class="header">
+  <h1>Sub-Processes in RSA</h1>
+</div>
+<div class="b_container">
+  <div class="prime_test">
+    <div class="header_1">
+      <h1>Miller Rabin Test</h1>
+    </div>
+    <div class="container_1">
+      <div class="card">
+        <h1>Primality Testing</h1>
+        <div class="row">
+            <div class="column input-section">
+                <form onsubmit="return performPrimalityTest()">
+                    <label for="numberInput">Enter an Integer:</label>
+                    <input type="number" id="numberInput" name="number" placeholder="Enter an integer" required>
+                    <label for="testCases">Number of Test Cases:</label>
+                    <input type="number" id="testCases" name="testCases" placeholder="Enter the number of test cases" required>
+                    <button type="submit">Test</button>
+                </form>
+            </div>
+        </div>
+      </div>
+      <!-- Results Table -->
+      <div class="card">
+        <h2>Results:</h2>
+        <table id="resultsTable">
+            <thead>
+                <tr>
+                    <th>Test Case</th>
+                    <th>Result</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- JavaScript will populate this table with results -->
+            </tbody>
+        </table>
+      </div>
+      </div>
+  </div>
+  <div class="factorisation">
+    <div class="header_1">
+      <h1>Factorisation</h1>
+    </div>
+    <div class="container_1">
+    <div class="factor_card">
+      <h2>Integer Factorisation:</h2>
+      <label for="factor">Enter Integer:</label>
+      <input type="text" id="factor" name="factor" placeholder="Integer Value">
+      <button id="factorise" onclick="factorise()"><ion-icon name="search-circle"></ion-icon> Factorise</button>
+      <button id="reset" onclick="reset()"><ion-icon name="refresh"></ion-icon> Reset</button>
+      <label for="factoredtext">Factors:</label>
+      <textarea id="factoredText" rows="10" cols="50" readonly></textarea>
+    </div>
+  </div>
+  </div>
+  </div>
+</div>
+<div class="c_container">
+  <div class="modular_expo">
+    <div class="header_1">
+      <h1>Modular exponentiation</h1>
+    </div>
+    <div class="container_1">
+      <div class="expo_card">
+        <h2>Modular Exponentiation:</h2>
+        <label for="base">Enter Base:</label>
+      <input type="text" id="base" name="base" placeholder="Base Value">
+      <label for="exponent">Enter Exponent:</label>
+      <input type="text" id="exponent" name="exponent" placeholder="Exponent Value">
+      <label for="modulo">Enter Modulo:</label>
+      <input type="text" id="modulo" name="modulo" placeholder="Modulo Value">
+      <button id="expo" onclick="expo()"><ion-icon name="calculator"></ion-icon> Calculate</button>
+      <button id="reset" onclick="reset1()"><ion-icon name="refresh"></ion-icon> Reset</button>
+      <label for="result_expo">Result:</label>
+      <textarea id="result_expo" rows="6" cols="25" readonly></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="modular_inv">
+    <div class="header_1">
+      <h1>Modular Inverse</h1>
+    </div>
+    <div class="container_1">
+      <div class="inv_card">
+        <h2>Modular Inverse:</h2>
+        <label for="int">Enter Integer:</label>
+      <input type="text" id="int" name="int" placeholder="Integer Value">
+      <label for="modulon">Enter Exponent:</label>
+      <input type="text" id="modulon" name="modulon" placeholder="Modulo N Value">
+      <button id="inv" onclick="inv()"><ion-icon name="calculator"></ion-icon> Calculate</button>
+      <button id="reset" onclick="reset2()"><ion-icon name="refresh"></ion-icon> Reset</button>
+      <label for="result_inv">Result:</label>
+      <textarea id="result_inv" rows="10" cols="25" readonly></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="script.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<footer>
+  <div class="footer-content">
+  </div>
+  <div class="footer-bottom">
+      <p>&copy; 2023 RSA Calci. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>
